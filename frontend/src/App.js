@@ -21,6 +21,7 @@ import AddProduct from './pages/addProduct';
 import EditProduct from './pages/editProduct';
 import AdminLogin from './pages/adminLogin';
 import Checkout from './pages/checkout';
+import paymentSuccess from './pages/paymentSuccess';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -49,6 +50,7 @@ function App() {
         <Route path='/editproduct' element={<Layout><EditProduct/></Layout>}/>
         <Route path='/adminlogin' element={<Layout><AdminLogin/></Layout>}/>
         <Route path='/checkout' element={<Layout><Checkout/></Layout>}/>
+        <Route path='/paymentsuccess' element={<Layout><paymentSuccess/></Layout>}/>
       </Routes>
     </div>
   );

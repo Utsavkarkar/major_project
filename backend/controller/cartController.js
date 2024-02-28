@@ -17,7 +17,7 @@ exports.addToCart = async (req,res) => {
     }
     // console.log(dataObj);
     
-    var chk = await cart.find({"productName":data.productName})
+    var chk = await cart.find({"productName":data.productName,"userId":userId})
     // console.log(chk);
     
     if(chk.length == 0){

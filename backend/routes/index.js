@@ -1,11 +1,13 @@
 var express = require('express');
 var router = express.Router();
-var {register,login,Forgot_pass, getUsers,} = require('../controller/usercontroller')
+var {register,login,Forgot_pass, getUsers, addAddress, getAddress,} = require('../controller/usercontroller')
 var {addProduct ,getProduct ,findByCategory, updateProduct, getProductById, deleteProduct} = require('../controller/productController')
 const multer = require('multer');
 const { addToCart, getCart, removeCartProduct, qtyPlus, qtyMinus } = require('../controller/cartController');
 const { adminLogin } = require('../controller/adminController');
 var auth = require('../middleware/auth');
+
+const { checkOut , paymentVerification, getKey } = require('../controller/paymentController');
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -22,6 +24,13 @@ router.get('/',(req,res)=>{
   res.render('index')
 })
 
+// payment gateway routes
+router.post('/checkout',checkOut);
+router.post('/paymentverification',paymentVerification);
+router.get('/getkey',getKey);
+
+
+// cart routes
 router.post('/addtocart',addToCart);
 router.get('/getcart',getCart);
 router.delete('/removecartproduct',removeCartProduct);
@@ -32,6 +41,10 @@ router.post('/qtyminus',qtyMinus);
 router.post('/reg',register );
 router.post('/login',login);
 router.post('/forgot',Forgot_pass);
+
+// for user's address
+router.post('/addaddress',addAddress);
+router.get('/getaddress',getAddress);
 
 // admin route
 router.post('/adminLogin',adminLogin);

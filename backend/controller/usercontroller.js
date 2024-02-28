@@ -80,16 +80,54 @@ exports.Forgot_pass = async (req, res) => {
     }
 }
 
-// exports.getUsers = async(req,res) => {
-//     try {
-//         var data = await user.find().populate("cart")
-//         res.status(200).json({
-//             status: "Users are here !!!",
-//             data
-//         })
-//     } catch (error) {
-//         res.status(200).json({
-//             error
-//         })
-//     }
-// }
+exports.addAddress = async (req, res) => {
+    try {
+      const userId = await storage.getItem("userid");
+      const userDoc = await user.findById(userId);
+  
+      // Extract existing user data
+      const { email, username, password } = userDoc;
+  
+      // Extract address details from the request body
+      const { house_no, street, city, state, pincode } = req.body;
+  
+      const updatedDataObj = {
+        email,
+        username,
+        password,
+        address: {
+          house_no,
+          street,
+          city,
+          state,
+          pincode,
+        },
+      };
+      await user.findByIdAndUpdate(userId, updatedDataObj);
+      res.status(200).json({
+        status: "ok",
+        //   chk,
+      });
+    } catch (error) {
+      res.status(500).json({
+        error,
+      });
+    }
+  };
+  
+  exports.getAddress = async (req, res) => {
+    try {
+      const userId = await storage.getItem("userid");
+      const userDoc = await user.findById(userId);
+      var address = userDoc.address;
+      res.status(200).json({
+          status:"This Is User's Address...",
+          address
+      })
+    } catch (error) {
+      res.status(500).json({
+        error,
+      });
+    }
+  };
+  
