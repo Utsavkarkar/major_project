@@ -24,23 +24,13 @@ const Login = () => {
         navigate('/');
         localStorage.setItem('status', JSON.stringify(response));
         // console.log(response);
-      } else if(response.data == "check your email or password"){
-        setLoginStatus(response.data);
+      } else if(response.data.status == "check your email or password"){
+        setLoginStatus(response.data.status);
       }else{
-        setLoginStatus(response.data);
+        setLoginStatus(response.data.status);
       }
-      // else {
-      //     setLoginStatus(response.data[0].email);
-      //     navigate('/');
-      //     // console.log(response.status,"---")
-      //     localStorage.setItem('status', JSON.stringify(response))
-      // }
     })
   }
-
-
-
-  
 
   return (
     <>

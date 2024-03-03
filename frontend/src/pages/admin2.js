@@ -9,9 +9,7 @@ function Admin2(){
     const [data, setData] = useState([]);
     const [display, setdisplay] = useState(false)
     const [EditModal, setEditModal] = useState(false)
-    const [SelectedData, setSelectedData] = useState([])
-    // const [id, setId] = useState([]);
-   
+    const [SelectedData, setSelectedData] = useState([])  
 
     useEffect(()=>{
       axios.get('http://localhost:8000/getproduct')
@@ -19,28 +17,29 @@ function Admin2(){
       .catch(err => console.log(err))
     },[])   
 
+    const fetchData = () => {
+      axios.get('http://localhost:8000/getproduct')
+      .then(res => setData(res.data.data))
+      .catch(err => console.log(err))
+    };
+  
+
     const onClickHandler =()=>{
         setdisplay(true)
     }
     const onclikdelete =(data)=>{
-      // setId(data)
-      console.info('iddddddddd',data)
       axios.delete(`http://localhost:8000/deleteproduct?id=${data}`)
       .then((res) => console.log(res))
-      .then(console.log("deleted success"))
+      .then(res => {fetchData()})
       .catch(err => console.log(err))
+      
     }
 
     const onEdit =(data)=>{
-      // console.info('edite',data)
-      // var obj = data
       setSelectedData(data);
       setEditModal(true)
     }
-   
-
-    
-    
+       
     return(
       <div>
         <h1>admin-2</h1>

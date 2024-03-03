@@ -19,7 +19,8 @@ const AdminLogin = ()=>{
         password: password,
       }).then((response) => {
         console.log(response)
-        // console.log(response.data.status); 
+        localStorage.setItem('auth',JSON.stringify(response.data.token))
+        console.log(response.data.token); 
         if (response.data.status == "logged in") {
           navigate('/admin2');
           localStorage.setItem('status', JSON.stringify(response));

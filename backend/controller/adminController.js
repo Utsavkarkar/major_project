@@ -1,6 +1,6 @@
 require('dotenv').config();
 const admin = require('../model/adminmodel')
-// var jwt = require('jsonwebtoken');
+var jwt = require('jsonwebtoken');
 const storage = require('node-persist');
 storage.init();
 
@@ -14,12 +14,12 @@ exports.adminLogin = async(req,res)=>{
             var password = req.body.password;
             if(chk[0].password == password){
                 // console.log("logged in")
-                // var token = jwt.sign({chk}, process.env.AUTH_SECRET_KEY);
+                var token = jwt.sign({chk}, process.env.AUTH_SECRET_KEY);
                 // await storage.setItem('tkn',token);
                 // console.log(await storage.getItem('tkn'));
                 res.status(200).json({
                     status:"logged in",
-                    // token
+                    token
                 })
             }else{
                 // console.log("chk name or pass")

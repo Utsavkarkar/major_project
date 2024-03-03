@@ -1,4 +1,3 @@
-require('dotenv').config();
 var jwt = require('jsonwebtoken');
 
 exports.chk_token = async (req,res,next) =>{

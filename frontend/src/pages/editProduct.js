@@ -8,24 +8,8 @@ const EditProduct = ({ display, setdisplay, SelectedData }) => {
   const [category, setCategory] = useState();
   const [image1, setImage] = useState();
   const [price, setPrice] = useState();
-  const [pid, setPid] = useState("");
 
-  // Function to get the id
-  const toGetId = () => {
-    let id = SelectedData._id;
-    // console.info("id of product", id);
-    return id;
-  };
-
-  // Call toGetId and store the result in a variable
-  const productId = toGetId();
-
-  useEffect(() => {
-    axios
-      .get(`http://localhost:8000/getproductbyid?id=${productId}`)
-      .then((res) => setPid(res.data.data._id))
-      .catch((err) => console.log(err));
-  });
+  let id = SelectedData._id;
 
   const updateProduct = (e) => {
     e.preventDefault();
@@ -35,22 +19,15 @@ const EditProduct = ({ display, setdisplay, SelectedData }) => {
     formData1.append("image", image1);
     formData1.append("price", price);
     axios
-      .post(`http://localhost:8000/updateproduct?id=${pid}`, formData1)
-      // .then((response) => {
-      //   console.log(response);
-      // })
-      // .then(console.log("pid in update onclick", pid))
+      .post(`http://localhost:8000/updateproduct?id=${id}`, formData1)
       .then((res) => console.log(res.data))
       .catch((err) => console.log(err));
-
-    // console.log(formData1);
   };
 
   return (
     <Modal show={display} onHide={handleClose}>
       <div>
         <h1>edit product</h1>
-
         <form
           onSubmit={updateProduct}
           encType="multipart/form-data"
