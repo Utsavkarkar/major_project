@@ -39,9 +39,6 @@ exports.addProduct = async (req, res) => {
                 error
              })
         }
-
-       
-   
 };
 
 // For Find All Product From Products collection
@@ -108,7 +105,6 @@ exports.findByCategory = async (req, res) => {
 exports.updateProduct = async (req,res) => {
     try {
         var id = req.query.id;
-
         const { productName, category, price } = req.body;
         const image1 = req.file.originalname;
         const obj = {
@@ -117,9 +113,7 @@ exports.updateProduct = async (req,res) => {
             category: category, //model name or number like iphone 13 ,14 and so on....
             price: price,
         };
-
         await product.findByIdAndUpdate(id,obj);
-
         res.status(200).json({
             status:"Product Data Updated Successfully"
         })
@@ -134,9 +128,7 @@ exports.updateProduct = async (req,res) => {
 exports.deleteProduct = async (req,res) => {
     try {
         var id = req.query.id;
-
         await product.findByIdAndDelete(id);
-
         res.status(200).json({
             status:"data deleted successfully"
         })

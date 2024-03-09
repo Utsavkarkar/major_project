@@ -16,10 +16,8 @@ exports.addToCart = async (req,res) => {
         "userId":userId
     }
     // console.log(dataObj);
-    
     var chk = await cart.find({"productName":data.productName,"userId":userId})
     // console.log(chk);
-    
     if(chk.length == 0){
         await cart.create(dataObj);
         // console.log(addProToCart);
@@ -54,9 +52,7 @@ exports.getCart = async (req,res) => {
 exports.removeCartProduct = async (req,res) => {
     try {
         var id = req.query.id;
-
         await cart.findByIdAndDelete(id);
-
         res.status(200).json({
             status:"product removed from cart successfully"
         })
@@ -81,8 +77,10 @@ exports.qtyPlus = async (req,res) => {
             "userId":data.userId
         }
         var qty = parseInt(data.qty);
-        var dataObj = {
-            "qty":qty+1
+        if(qty>=1){
+            var dataObj = {
+                "qty":qty+1
+            }
         }
         await cart.findByIdAndUpdate(req.query.id,dataObj);
 
@@ -110,11 +108,15 @@ exports.qtyMinus = async (req,res) => {
             "userId":data.userId
         }
         var qty = parseInt(data.qty);
-        var dataObj = {
-            "qty":qty-1
+        if(qty>1){
+            var dataObj = {
+              "qty":qty-1
+            }
         }
+        // else{
+        //     await cart.findByIdAndDelete(id);
+        // }
         await cart.findByIdAndUpdate(id,dataObj);
-
         res.status(200).json({
             status:"product's qty added by one..."
         })

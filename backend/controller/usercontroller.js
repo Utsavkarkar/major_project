@@ -9,7 +9,6 @@ exports.register = async (req, res) => {
     var chkdata = await user.find({ email: req.body.email });
     if (chkdata == 0) {
       var data = await user.create(req.body);
-      // console.log(data.cart);
       res.status(200).json({
         status: "ok",
         data,
@@ -136,13 +135,10 @@ exports.addAddress = async (req, res) => {
   try {
     const userId = await storage.getItem("userid");
     const userDoc = await user.findById(userId);
-
     // Extract existing user data
     const { email, username, password } = userDoc;
-
     // Extract address details from the request body
     const { house_no, street, city, state, pincode } = req.body;
-
     const updatedDataObj = {
       email,
       username,
@@ -182,3 +178,24 @@ exports.getAddress = async (req, res) => {
     });
   }
 };
+
+exports.logOut = async (req, res) => {
+  try {
+    const userId = await storage.getItem("userid");
+    console.log(userId);
+    if(userId != undefined){
+      await storage.removeItem('userid');
+      res.status(200).json({
+        status: "Logged Out...",
+      })
+    }else{
+      res.status(200).json({
+        status: "You Are Already Logged Out...",
+      })
+    }    
+  } catch (error) {
+    res.status(500).json({
+      error,
+    });
+  }
+}
