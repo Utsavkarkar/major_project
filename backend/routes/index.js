@@ -42,7 +42,7 @@ router.post('/qtyminus',qtyMinus);
 router.post('/reg',register );
 router.post('/login',login);
 router.post('/logout',logOut);
-router.post('/forgot',Forgot_pass);
+router.patch('/forgot',Forgot_pass);
 
 // for user's address
 router.post('/addaddress',addAddress);

@@ -41,7 +41,6 @@ exports.getCart = async (req,res) => {
 
     var userId = await storage.getItem('userid');    
     var chk = await cart.find({"userId":userId});
-    // console.log(userId);
     res.status(200).json({
         status:"user's Cart is Here...",
         chk

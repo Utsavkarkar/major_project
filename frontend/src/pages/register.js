@@ -28,14 +28,10 @@ const Register = ()=>{
             navigate("/login");
           }
         })
-       
       }
  
     return(
         <div>
-            
-            
-
             <div className="conatainer">
             <form onSubmit={register}>
                 <h4 className="title">Register Here</h4>

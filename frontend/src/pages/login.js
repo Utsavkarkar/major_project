@@ -21,9 +21,7 @@ const Login = () => {
     }).then((response) => {
       // console.log(response.data.status); 
       if (response.data.status == "logged in") {
-        navigate('/');
-        localStorage.setItem('status', JSON.stringify(response));
-        // console.log(response);
+        navigate('/otp');
       } else if(response.data.status == "check your email or password"){
         setLoginStatus(response.data.status);
       }else{
@@ -31,7 +29,6 @@ const Login = () => {
       }
     })
   }
-
   return (
     <>
      

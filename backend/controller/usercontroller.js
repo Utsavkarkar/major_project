@@ -11,16 +11,14 @@ exports.register = async (req, res) => {
       var data = await user.create(req.body);
       res.status(200).json({
         status: "ok",
-        data,
       });
     } else {
       res.status(200).json({
         status: "you are already registered",
-        data,
       });
     }
   } catch (error) {
-    res.status(200).json({
+    res.status(500).json({
       error,
     });
   }
@@ -65,7 +63,6 @@ Team SlikSkins.`
         });
         res.status(200).json({
           status: "logged in",
-          data,
         });
       } else {
         res.status(200).json({

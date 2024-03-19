@@ -1,30 +1,27 @@
-// import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
+import axios from 'axios';
 
-// const Profile = () => {
+const Profile = () => {
 
-//     const [data, setData] = useState([]);
+    const [data, setData] = useState([]);
 
-    
-//     useEffect(() => {
-//         setData(JSON.parse(localStorage.getItem('status')) || [])
-//     }, [])
-   
-//     return (
-//         <div>
-//             {data?.map((i) => {
-//                 return (
-//                     <div className="profile">
-//                         <h2 className="title">My Profile</h2>
-//                         <div className="profile_content">
-//                             {/* <p>Username: {i.username}</p> */}
-//                             {/* <p>Email : {i.email}</p> */}
-//                         </div>
-//                     </div>
-//                 )
+    useEffect(() => {
+        axios.get('http://localhost:8000/getuserdata')
+            .then(res => setData(res.data.userData))
+            .catch(err => console.log(err))
+    }, [])
 
-//             })}
-//         </div>
-//     )
-// }
+    return (
+        <div>
+            <div className="profile">
+                <h2 className="title">My Profile</h2>
+                <div className="profile_content">
+                    <p>Username: {data.username}</p>
+                    <p>Email : {data.email}</p>
+                </div>
+            </div>
+        </div>
+    )
+}
 
-// export default Profile
+export default Profile

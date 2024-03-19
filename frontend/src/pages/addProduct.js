@@ -21,9 +21,7 @@ const AddProduct = ({display1,setdisplay1})=>{
       formData.append('price',price)
       axios.post('http://localhost:8000/add',formData)
       .then((response)=>{
-          console.log(response)
-          console.log(response.data)
-
+        axios.get(`http://localhost:8000/getproduct`)
         })
         setdisplay1(false)
     }
@@ -39,9 +37,6 @@ const AddProduct = ({display1,setdisplay1})=>{
             Price : <input type="text" name="price" onChange={(e) => setPrice(e.target.value)}/><br /><br />
 
             <button className="btn btn-success" type="submit">Upload</button><br/><br/><br/> 
-        
-     
-
         </form>
         </div>
         </Modal>

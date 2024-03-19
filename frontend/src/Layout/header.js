@@ -3,6 +3,7 @@ import MainLogo from "../images/mainLOGO.png"
 import Cart from "../images/shopping-cart.png"
 import { Link, useLocation } from 'react-router-dom'
 import { toast } from 'react-toastify'
+import axios from 'axios'
 
 const Header = () => {
 
@@ -14,9 +15,9 @@ const Header = () => {
     }, [location])
 
     const logOutClick = () => {
-        localStorage.removeItem('status');
+        axios.post("http://localhost:8000/logout")
+        .then(localStorage.removeItem('status'))
         // toast.error("You Loged Out...");
-        
     }
     // console.log(data.data.data.email);
     return (
@@ -54,6 +55,9 @@ const Header = () => {
                             </li>&nbsp;&nbsp;&nbsp;
                             <li className="nav-item">
                                 <Link className="nav-link" to="/about">About<i className="fa-solid fa-chevron-down side_icon" /></Link>
+                            </li>&nbsp;&nbsp;&nbsp;
+                            <li className="nav-item">
+                                <Link className="nav-link" to="/account">Account<i className="fa-solid fa-chevron-down side_icon" /></Link>
                             </li>&nbsp;&nbsp;&nbsp;
 
                             <li className="nav-item">

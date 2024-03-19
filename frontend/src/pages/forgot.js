@@ -14,26 +14,15 @@ const Forgot = ()=>{
     const forgot = (e) => {
         e.preventDefault();
         axios.post("http://localhost:8000/forgot", {
-            // username: username,
             email: email,
             password: password,
         }).then((response) => {
-          // setRegisterStatus(response);
-          // console.log(response);
           if(response.data == "data updated successfully"){
             setRegisterStatus(response.data);
             navigate('/login');
           }else{
             setRegisterStatus(response.data);
           }
-
-          // if(response.data.message){
-          //   setRegisterStatus(response.data.message);
-          //   navigate('/login');
-          // }else{
-          //   setRegisterStatus("Please enter correct email...");
-          
-          // }
         })
       }
 

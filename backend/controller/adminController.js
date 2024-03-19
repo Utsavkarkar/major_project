@@ -12,16 +12,14 @@ exports.adminLogin = async(req,res)=>{
             var password = req.body.password;
             if(chk[0].password == password){
                 var token = jwt.sign({chk}, process.env.AUTH_SECRET_KEY);
-                // await storage.setItem('tkn',token);
-                // console.log(await storage.getItem('tkn'));
+        
                 res.status(200).json({
                     status:"logged in",
                     token
                 })
             }else{
                  res.status(200).json({
-                    status:"check your name or password"
-                    
+                    status:"check your name or password",
                 })
             }
         }else{
